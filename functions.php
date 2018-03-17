@@ -33,7 +33,7 @@ function celestial_scripts() {
 			'root' => esc_url_raw( $url ),
 		),
 		'woo' => array(
-			'url' => esc_url_raw( 'https://localhost/react/wp-json/wc/v2/' ),
+			'url' => esc_url_raw( WOO_URL ),
 			'consumer_key' => CONSUMER_KEY,
 			'consumer_secret' => CONSUMER_SECRET
 			//'consumer_key' => 'ck_8b691a9d2443c4703560ceb3aaf6b31c990aa4a6',

@@ -21,6 +21,7 @@ class Product extends React.Component {
                 if (!response.ok) {
                     throw Error(response.statusText);
                 }
+             
                 return response.json();
             })
             .then(function (res) {
@@ -51,6 +52,7 @@ class Product extends React.Component {
     }
 
     render() {
+        console.log('this.state.product',this.state.product);
         return (
             <div className="container post-entry">
                 {this.state.product ?

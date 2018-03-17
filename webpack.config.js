@@ -1,5 +1,9 @@
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var path = require('path');
+// Try the environment variable, otherwise use root
+require('dotenv').load();
+const APP_URL = process.env.APP_URL;
+const ASSET_PATH = process.env.ASSET_PATH || '/';
 
 module.exports = {
 	entry: {
@@ -27,7 +31,7 @@ module.exports = {
 			{
 				test: /\.(jpe?g|png|gif|svg)$/i,
 				use: [
-					'file-loader?name=[name].[ext]&outputPath=images/&publicPath=http://localhost/react/wp-content/themes/celestial/dist/images',
+					`file-loader?name=[name].[ext]&outputPath=images/&publicPath=${APP_URL}/wp-content/themes/celestial/dist/images`,
 					'image-webpack-loader'
 				]
 			},

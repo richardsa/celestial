@@ -1,5 +1,9 @@
+var _ = require('lodash');
+
 import React from 'react';
 import NotFound from './not-found';
+import LoadingIcon from './loading-icon.gif';
+
 
 class Post extends React.Component {
 
@@ -28,6 +32,18 @@ class Post extends React.Component {
     }
 
     renderPosts() {
+          if (_.isEmpty(this.state.post)) {
+        return (
+            <div>
+            {
+                this.renderLoading()
+                
+            }
+            </div>
+            
+        ) 
+               
+          }
         return (
             <div className="card">
                 <div className="card-body">
@@ -47,14 +63,22 @@ class Post extends React.Component {
             <NotFound />
         )
     }
+    
+    renderLoading(){
+        return (
+            <div>
+             <img src={LoadingIcon} alt="loader gif" id="loader" />
+            </div>
+        )
+    }
 
     render() {
-        console.log('this.state.post',this.state.post)
         return (
             <div className="container post-entry">
-                {this.state.post.title ?
-                    this.renderPosts() :
-                    this.renderEmpty()
+                { 
+                   this.state.post != undefined ?
+                   this.renderPosts() :
+                   this.renderEmpty()
                 }
             </div>
         );

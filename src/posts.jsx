@@ -23,6 +23,7 @@ class Posts extends React.Component {
     }
 
     componentDidMount() {
+        console.log(process.env.ASSET_PATH);
         var that = this;
         window.onbeforeunload = function () { window.scrollTo(0, 0); }
 
