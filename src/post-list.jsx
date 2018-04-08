@@ -8,12 +8,13 @@ class PostList extends React.Component {
 
     renderPosts() {
         return this.props.posts.map((post, i) => {
+            
             return (
                 <div className="col-md-4 card-outer" key={i}>
                     <div className="card">
                         <div className="img-outer">
                             <Link to={post.slug}>
-                                <img className="card-img-top" src={post.featured_image_src ? post.featured_image_src : Placeholder} alt="Featured Image" />
+                                <img className="card-img-top img-responsive center-block" src={post.featured_image_src ? post.featured_image_src : Placeholder} alt="Featured Image" />
                             </Link>
                         </div>
                         <div className="card-body">

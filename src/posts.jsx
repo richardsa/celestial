@@ -8,23 +8,24 @@ class Posts extends React.Component {
 
     constructor(props) {
         super(props);
-        this.getMorePosts = this.getMorePosts.bind(this);
+        this.getPosts = this.getPosts.bind(this);
         this.state = {
             posts: [],
-            page: 0,
+            page: 1,
             getPosts: true,
             controller: false
         }
-        this.getMorePosts = this.getMorePosts.bind(this);
+        this.getPosts = this.getPosts.bind(this);
     }
 
     componentWillUnmount() {
-        this.getMorePosts = null;
+        this.getPosts = null;
     }
 
     componentDidMount() {
-        console.log(process.env.ASSET_PATH);
         var that = this;
+        
+        that.getPosts();
         window.onbeforeunload = function () { window.scrollTo(0, 0); }
 
         // init ScrollMagic Controller
@@ -34,19 +35,19 @@ class Posts extends React.Component {
         var scene = new ScrollMagic.Scene({ triggerElement: "#colophon", triggerHook: "onEnter" })
             .addTo(that.state.controller)
             .on("enter", function (e) {
-                if (that.state.getPosts && that.getMorePosts !== null) {
-                    that.getMorePosts();
+                if (that.state.getPosts && that.getPosts !== null) {
+                    that.getPosts();
                 }
             });
     }
 
-    getMorePosts() {
+    getPosts() {
         var that = this;
         var totalPages;
 
         // adding a loader
         jQuery("#loader").addClass("active");
-
+        console.log(CelestialSettings.URL.api + "/posts/?page=" + this.state.page)
         this.setState({ page: this.state.page + 1 });
 
         fetch(CelestialSettings.URL.api + "/posts/?page=" + this.state.page)

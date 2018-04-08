@@ -1,24 +1,37 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Primary from './primary';
 
 const Header = () => (
-    <div className="container">
+        <div>
         <header id="masthead" className="site-header" role="banner">
-            <nav className="navbar navbar-expand-lg navbar-light " >
-                <h1 className="site-title"><Link to={CelestialSettings.path} >Celestial</Link></h1>
-                <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                    <span className="navbar-toggler-icon"></span>
+        <div className="navbar-wrapper">
+            <nav className="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <div className="container-fluid">
+              <div className="navbar-wrapper">
+                <button type="button" className="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                  <span className="sr-only">Toggle navigation</span>
+                  <i className="fa fa-bars fa-toggle fa-lg" aria-hidden="true"></i>
                 </button>
-                <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
-                    <div className="navbar-nav">
-                        <Link className="nav-item nav-link active" to={CelestialSettings.path} >Home <span className="sr-only">(current)</span></Link>
-                        <Link className="nav-item nav-link" to={CelestialSettings.path + "posts/"} >Posts</Link>
-                        <Link className="nav-item nav-link" to={CelestialSettings.path + "products/"} >Products</Link>
-                    </div>
+                <Link className="navbar-brand" to={CelestialSettings.path} >Celestial</Link>
+              </div>
+                <Primary />
+            
+           
+              {/*<div className="navbar-collapse collapse" id="navbarNavAltMarkup">
+                    <ul id="menu-primary" className="nav navbar-nav navbar-right">
+                       <li><Link className="nav-item nav-link active" to={CelestialSettings.path} >Home <span className="sr-only">(current)</span></Link></li>
+                        <li><Link className="nav-item nav-link" to={CelestialSettings.path + "posts/"} >Posts</Link></li>
+                        <li><Link className="nav-item nav-link" to={CelestialSettings.path + "products/"} >Products</Link></li>
+                    </ul>
                 </div>
-            </nav >
-        </header>
-    </div>
+                */}
+              </div>
+              </nav >
+        
+        </div>
+      </header>
+   </div>
 );
 
 export default Header;

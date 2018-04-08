@@ -9,6 +9,7 @@ import Posts from './posts';
 import Post from './post';
 import Products from './products';
 import Product from './product';
+import Testing from './testing';
 import NotFound from './not-found';
 import LoadingIcon from './loading-icon.gif';
 import Placeholder from './placeholder.jpg';
@@ -26,6 +27,7 @@ const App = () => (
                 <Route exact path={CelestialSettings.path + 'posts/:slug'} component={Post} />
                 <Route exact path={CelestialSettings.path + 'products'} component={Products} />
                 <Route exact path={CelestialSettings.path + 'products/:product'} component={Product} />
+                <Route exact path={CelestialSettings.path + 'testing'} component={Testing} />
                 <Route component={ NotFound } />
                
             </Switch>

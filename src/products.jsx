@@ -9,7 +9,7 @@ class Products extends React.Component {
         super(props);
         this.state = {
             products: [],
-            page: 0,
+            page: 1,
             getProducts: true,
             controller: false
         }
@@ -22,7 +22,8 @@ class Products extends React.Component {
 
     componentDidMount() {
         var that = this;
-
+        // initial call to load products
+        that.getMoreProducts();
         // init ScrollMagic Controller
         that.state.controller = new ScrollMagic.Controller();
 
@@ -98,18 +99,19 @@ class Products extends React.Component {
 
     renderProducts() {
         return this.state.products.map((product, i) => {
+            console.log(CelestialSettings.woo.url + "products?page=" + this.state.page + "&consumer_key=" + CelestialSettings.woo.consumer_key + "&consumer_secret=" + CelestialSettings.woo.consumer_secret)
             return (
                 <div className="col-md-4 card-outer" key={i}>
                     <div className="card">
                         <div className="img-outer">
                             <Link to={product.slug}>
-                                <img className="card-img-top" src={product.images ? product.images[0].src : Placeholder} alt="Featured Image" />
+                                <img className="card-img-top img-responsive center-block" src={product.images ? product.images[0].src : Placeholder} alt="Featured Image" />
                             </Link>
                         </div>
                         <div className="card-body">
                             <h4 className="card-title"><Link to={product.slug}>{product.name}</Link></h4>
                             <p className="card-text"><small className="text-muted">$ {product.price}</small></p>
-                            <p>{jQuery(product.description).text()}</p>
+                            <p>{jQuery(product.description).text().substr(0, 175)}[...]</p>
                         </div>
                     </div>
                 </div>

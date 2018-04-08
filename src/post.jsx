@@ -50,7 +50,7 @@ class Post extends React.Component {
                     <h4 className="card-title">{this.state.post.title.rendered}</h4>
                     <p className="card-text"><small className="text-muted">{this.state.post.author_name} &ndash; {this.state.post.published_date}</small></p>
                     {
-                        this.state.post.featured_image_src ? <img className="featured-image" src={this.state.post.featured_image_src} alt="featured image" /> : null
+                        this.state.post.featured_image_src ? <img className="featured-image center-block" src={this.state.post.featured_image_src} alt="featured image" /> : null
                     }
                     <p className="card-text" dangerouslySetInnerHTML={{ __html: this.state.post.content.rendered }}  />
                 </div>

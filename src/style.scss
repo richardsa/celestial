@@ -8,6 +8,7 @@ body, div#page-inner {  /* Will not work on IE if body is ommitted */
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    
 }
 
 div#content {
@@ -18,9 +19,9 @@ div#content {
     padding-left: 1rem;
 }
 
-.navbar {
+/*.navbar {
     border-bottom: 1px solid #eaeaea;
-}
+}*/
 
 .site-content-contain {
     background-color: transparent !important;
@@ -86,12 +87,14 @@ img#loader {
 }
 
 .col-md-4.card-outer .card, .col-md-12.card-outer .card {
-    height: 520px;
+  /* height: 520px;*/
 }
 
 .img-outer {
-    max-height: 250px;
-    overflow: hidden;
+    max-width: 100%;
+   /* max-height: 250px;*/
+   height: auto;
+   overflow: hidden;
 }
 
 #posts-here {
@@ -107,6 +110,7 @@ img#loader {
 .card-outer.fade-in {
     opacity: 1;
     transform: translateY(0);
+    //margin-bottom: 30px;
 }
 
 .card-body div {
@@ -114,5 +118,86 @@ img#loader {
 }
 
 img.product-image, img.featured-image {
-    width: 100%;
+  max-width: 100%; 
+  height: auto;
 }
+
+/* richie custom */
+/*fix issue with navbar when logged in */
+.logged-in .navbar-fixed-top {
+	top:32px;
+}
+
+body {
+    margin-top: 100px;
+    font-family: 'proxima-nova', 'Raleway', Helvetica, sans-serif;
+    font-size: 16px;
+    background: url(/wp-content/themes/celestial/dist/images/tile.jpg) top left repeat;
+}
+
+/* navbar */
+.navbar-inverse .navbar-brand, .navbar-inverse .navbar-nav>li>a, {
+    color: #ffffff;
+}
+
+.navbar-inverse .navbar-toggle {
+    border-color: white;
+    color: white;
+}
+
+.navbar-fixed-top .navbar-collapse {
+    width: 100%;
+    max-height: 340px;
+}
+
+.card {
+    padding: 25px;
+    border-radius: 25px;
+    box-shadow: 0 4px 6px 0 hsla(0, 0%, 0%, 0.2);
+    /* border: solid 1px #ddd; */
+    background: white;
+}
+.img-outer {
+    height:250px; 
+}
+img.card-img-top {
+    height: 100%;
+    vertical-align: middle;
+}
+/* nav toggle */
+.navToggle a{
+    position: relative;
+    display: block;
+    padding: 10px 15px;
+    line-height: 20px;
+    color: #ffffff;
+}
+.nav .open>a, .nav .open>a:focus, .nav .open>a:hover {
+    background-color: #101010;
+    /*border-color: #337ab7;*/
+}
+
+.dropdown-menu>li>a {
+    background-color: #101010;
+    color: #ffffff;
+}
+ul.dropdown-menu {
+    padding: 0px;
+    margin: 0px;
+}
+/* custom media queries */
+
+/* target medium and larger screens */
+@media screen and (min-width: 991px) {
+ .col-md-4.card-outer .card, .col-md-12.card-outer .card {
+   height: 475px;
+    }
+}
+
+@media screen and (min-width: 768px){
+    .navToggle a {
+        padding-top: 15px;
+        padding-bottom: 15px; 
+    }
+}
+

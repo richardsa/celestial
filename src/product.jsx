@@ -31,6 +31,7 @@ class Product extends React.Component {
 
     renderProduct() {
         return (
+            <div className="col-md-12 card-outer fade-in">
             <div className="card">
                 <div className="card-body">
                     <div className="col-sm-4"><img className="product-image" src={this.state.product.images ? this.state.product.images[0].src : null} alt={this.state.product.images ? this.state.product.images[0].alt : null } /></div>
@@ -41,6 +42,7 @@ class Product extends React.Component {
                         <p className="card-text">{jQuery(this.state.product.description).text()}</p>
                     </div>
                 </div>
+            </div>
             </div>
         );
     }

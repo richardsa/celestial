@@ -10,7 +10,9 @@
 function celestial_scripts() {
 
 	// Load our main stylesheet.
-	wp_enqueue_style( 'bootstrap-style', 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css' );
+	//wp_enqueue_style( 'bootstrap-style', 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css' );
+	wp_enqueue_style( 'bootstrap-style', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css');
+	wp_enqueue_style( 'font-awesome', 'https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
 	wp_enqueue_style( 'celestial-style-dist', get_stylesheet_directory_uri() . '/dist/style.css');
 	wp_enqueue_style( 'celestial-style', get_stylesheet_uri() );
 
@@ -18,8 +20,8 @@ function celestial_scripts() {
 	wp_enqueue_script( 'jquery', 'https://code.jquery.com/jquery-3.2.1.slim.min.js', '20171006', false );
 	wp_enqueue_script( 'scrollmagic', 'https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.5/ScrollMagic.min.js' , array( 'jquery' ), '1.0', false );
 	wp_enqueue_script( 'popper', 'https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js', array( 'jquery' ), '20171006', false );
-    wp_enqueue_script( 'bootstrap-script', 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js', array( 'jquery' ), '20171006', false );
-
+    //wp_enqueue_script( 'bootstrap-script', 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js', array( 'jquery' ), '20171006', false );
+	wp_enqueue_script( 'bootstrap-script', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js', array( 'jquery' ), '20171006', false );
     wp_enqueue_script( 'celestial-script', get_stylesheet_directory_uri() . '/dist/app.js' , array(), '1.0', true );
 
 	$url = trailingslashit( home_url() );
@@ -30,7 +32,9 @@ function celestial_scripts() {
 		'path' => $path,
 		'URL' => array(
 			'api' => esc_url_raw( get_rest_url( null, '/wp/v2' ) ),
+			'acf' => esc_url_raw( get_rest_url( null, '/acf/v3/' ) ),
 			'root' => esc_url_raw( $url ),
+			'menus' => esc_url_raw( get_rest_url( null, 'wp-api-menus/v2/menu-locations' ) ),
 		),
 		'woo' => array(
 			'url' => esc_url_raw( WOO_URL ),
@@ -42,6 +46,13 @@ function celestial_scripts() {
 	) ) ) );
 }
 add_action( 'wp_enqueue_scripts', 'celestial_scripts' );
+
+// register footer and primary menu
+register_nav_menus( array(
+    'footer' => esc_html__( 'Footer Menu', 'celestial'),
+		'primary' => esc_html__( 'Primary', 'celestial' ),
+	) );
+
 
 // Add various fields to the JSON output
 function celestial_register_fields() {
@@ -93,3 +104,6 @@ function celestial_excerpt_length( $length ) {
     return 20;
 }
 add_filter( 'excerpt_length', 'celestial_excerpt_length' );
+
+// Enable the option show in rest
+add_filter( 'acf/rest_api/field_settings/show_in_rest', '__return_true' );
