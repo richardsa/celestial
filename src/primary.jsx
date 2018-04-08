@@ -17,9 +17,6 @@ class Primary extends React.Component {
 
     componentDidMount() {
         var that = this;
-        //var url = window.location.href.split('/');
-        //var slug = url.pop() || url.pop();
-        console.log(CelestialSettings.URL.menus + "/primary");
         fetch(CelestialSettings.URL.menus + "/primary")
             .then(function (response) {
                 if (!response.ok) {
@@ -31,7 +28,14 @@ class Primary extends React.Component {
               that.setState({ menuItems: res })
             });
     }
+
+    // parseTo() and isInternal() functions are meant to check if menu item is external or
+    // if external create usual href Link
+    // if internal use Link from 'react-router-dom'
     // https://gist.github.com/shprink/bf9599e1d66b9dc4d151e89c1199ccb8
+    // without using functions links would return something similar to:
+    // https://appurl.com/https://gmail.com
+    
      parseTo(to) {
         let parser = document.createElement('a');
         parser.href = to;
@@ -39,33 +43,20 @@ class Primary extends React.Component {
     }
 
     isInternal(toLocation) {
-        
         return window.location.host === toLocation.host;
     }
 
     renderMenuItem(url, title){
-        console.log(url + ' ' + title)
         const toLocation = this.parseTo(url);
-        console.log(toLocation);
-        console.log('this . internal location ' + this.isInternal(toLocation));
         const isInternal = this.isInternal(toLocation);
-        console.log(isInternal);
         if (isInternal) {
           return (<Link to={url}>{title}</Link>);
         } else {
           return (<a href={url}>{title}</a>);
         }
-        /*return (
-           <Link to={url} >{title}</Link> 
-        )*/
-        
     }
 
     renderParentMenuItem(menuItem){
-        console.log('parent '  + menuItem.title)
-        //const toLocation = this.parseTo(title);
-        //const isInternal = this.isInternal(toLocation);
-        //console.log(isInternal);
         return (
           <div className='navToggle'>
            <a href='#' data-toggle="dropdown" className="dropdown-toggle" >{menuItem.title}</a>
@@ -89,8 +80,6 @@ class Primary extends React.Component {
      });
     }
 
-    
-
     renderEmpty() {
         return (
             <NotFound />
@@ -107,20 +96,15 @@ class Primary extends React.Component {
 
     render() {
         return (
-            
-              <div className="navbar-collapse collapse" id="navbarNavAltMarkup">
+            <div className="navbar-collapse collapse" id="navbarNavAltMarkup">
                <ul id="menu-primary" className="nav navbar-nav navbar-right">
                 { 
                    this.state.menuItems != undefined ?
                    this.renderMenuItems(this.state.menuItems) :
                    this.renderLoading()
                 }
-                 
-                  
-               </ul>
+             </ul>
            </div>
-           
-           
         );
     }
 }
