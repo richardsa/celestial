@@ -1,6 +1,9 @@
+var _ = require('lodash');
+
 import React from 'react';
 import NotFound from './not-found';
 import { Link } from 'react-router-dom';
+import LoadingIcon from './loading-icon.gif';
 
 class Product extends React.Component {
 
@@ -12,6 +15,12 @@ class Product extends React.Component {
     }
 
     componentDidMount() {
+        // above scroll to not working
+        // using below for now
+        // https://stackoverflow.com/questions/1174863/javascript-scrollto-method-does-nothing/18573599#18573599
+        setTimeout(function () {
+            window.scrollTo(0, 0);
+        },2);
         var that = this;
         var url = window.location.href.split('/');
         var slug = url.pop() || url.pop();
@@ -55,6 +64,13 @@ class Product extends React.Component {
 
     render() {
         console.log('this.state.product',this.state.product);
+        if (_.isEmpty(this.state.product)){
+           return (
+                <div>
+                    <img src={LoadingIcon} alt="loader gif" id="loader" />
+                </div>
+            );
+        } 
         return (
             <div className="container post-entry">
                 {this.state.product ?

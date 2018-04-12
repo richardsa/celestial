@@ -18,6 +18,13 @@ class Home extends React.Component {
     componentDidMount() {
         var that = this;
         var url = window.location.href.split('/');
+        window.onbeforeunload = function () { window.scrollTo(0, 0); }
+        // above scroll to not working
+        // using below for now
+        // https://stackoverflow.com/questions/1174863/javascript-scrollto-method-does-nothing/18573599#18573599
+        setTimeout(function () {
+            window.scrollTo(0, 0);
+        },2);
        // var slug = url.pop() || url.pop();
         console.log(CelestialSettings.URL.api + "/pages?slug=home" )
         fetch(CelestialSettings.URL.api + "/pages?slug=home" )

@@ -107,3 +107,5 @@ add_filter( 'excerpt_length', 'celestial_excerpt_length' );
 
 // Enable the option show in rest
 add_filter( 'acf/rest_api/field_settings/show_in_rest', '__return_true' );
+
+

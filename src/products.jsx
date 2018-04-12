@@ -26,6 +26,12 @@ class Products extends React.Component {
         that.getMoreProducts();
         // init ScrollMagic Controller
         that.state.controller = new ScrollMagic.Controller();
+        // above scroll to not working
+        // using below for now
+        // https://stackoverflow.com/questions/1174863/javascript-scrollto-method-does-nothing/18573599#18573599
+        setTimeout(function () {
+            window.scrollTo(0, 0);
+        },2);
 
         // build scene
         var scene = new ScrollMagic.Scene({ triggerElement: "#colophon", triggerHook: "onEnter" })
