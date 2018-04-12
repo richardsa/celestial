@@ -185,6 +185,30 @@ ul.dropdown-menu {
     padding: 0px;
     margin: 0px;
 }
+
+/* back to list */
+.back-to-list {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    padding-right:15px;
+    padding-bottom: 1em;
+}
+
+.back-to-list a {
+    border-bottom-right-radius: 25px;
+    display: block;
+    padding: .5em 1em;
+    font-size: 90%;
+    text-decoration: none;
+    background: #00448D;
+    color: white;
+}
+
+.back-to-list a:focus, .back-to-list a:hover {
+    color: white;
+    background: #FB2d37;
+}
 /* custom media queries */
 
 /* target medium and larger screens */

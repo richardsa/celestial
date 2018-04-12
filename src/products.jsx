@@ -110,12 +110,12 @@ class Products extends React.Component {
                 <div className="col-md-4 card-outer" key={i}>
                     <div className="card">
                         <div className="img-outer">
-                            <Link to={product.slug}>
+                            <Link to={'/products/' + product.slug}>
                                 <img className="card-img-top img-responsive center-block" src={product.images ? product.images[0].src : Placeholder} alt="Featured Image" />
                             </Link>
                         </div>
                         <div className="card-body">
-                            <h4 className="card-title"><Link to={product.slug}>{product.name}</Link></h4>
+                            <h4 className="card-title"><Link to={'/products/' + product.slug}>{product.name}</Link></h4>
                             <p className="card-text"><small className="text-muted">$ {product.price}</small></p>
                             <p>{jQuery(product.description).text().substr(0, 175)}[...]</p>
                         </div>

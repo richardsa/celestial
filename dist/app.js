@@ -61343,7 +61343,7 @@ var Products = function (_React$Component) {
                             { className: 'img-outer' },
                             _react2.default.createElement(
                                 _reactRouterDom.Link,
-                                { to: product.slug },
+                                { to: '/products/' + product.slug },
                                 _react2.default.createElement('img', { className: 'card-img-top img-responsive center-block', src: product.images ? product.images[0].src : _placeholder2.default, alt: 'Featured Image' })
                             )
                         ),
@@ -61355,7 +61355,7 @@ var Products = function (_React$Component) {
                                 { className: 'card-title' },
                                 _react2.default.createElement(
                                     _reactRouterDom.Link,
-                                    { to: product.slug },
+                                    { to: '/products/' + product.slug },
                                     product.name
                                 )
                             ),
@@ -61430,6 +61430,8 @@ var _loadingIcon = __webpack_require__(21);
 var _loadingIcon2 = _interopRequireDefault(_loadingIcon);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -61534,6 +61536,15 @@ var Product = function (_React$Component) {
                                 jQuery(this.state.product.description).text()
                             )
                         )
+                    )
+                ),
+                _react2.default.createElement(
+                    'div',
+                    _defineProperty({ className: 'card-text' }, 'className', 'back-to-list'),
+                    _react2.default.createElement(
+                        _reactRouterDom.Link,
+                        { to: '/products' },
+                        'Return to product list'
                     )
                 )
             );
@@ -61912,41 +61923,7 @@ var Archive = function (_React$Component) {
     }, {
         key: 'renderEmpty',
         value: function renderEmpty() {
-            return _react2.default.createElement(
-                'div',
-                { id: 'content' },
-                _react2.default.createElement(
-                    'div',
-                    { className: 'container post-entry' },
-                    _react2.default.createElement(
-                        'div',
-                        { className: 'card' },
-                        _react2.default.createElement(
-                            'div',
-                            { className: 'card-body' },
-                            _react2.default.createElement(
-                                'h4',
-                                { className: 'card-title' },
-                                '404 Page Not Found!'
-                            ),
-                            _react2.default.createElement(
-                                'p',
-                                { className: 'card-text' },
-                                'The page you requested does not exist.'
-                            ),
-                            _react2.default.createElement(
-                                'p',
-                                { className: 'card-text' },
-                                _react2.default.createElement(
-                                    _reactRouterDom.Link,
-                                    { to: CelestialSettings.path },
-                                    'Return to homepage'
-                                )
-                            )
-                        )
-                    )
-                )
-            );
+            return _react2.default.createElement(_notFound2.default, null);
         }
     }, {
         key: 'renderLoading',

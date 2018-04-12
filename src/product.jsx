@@ -51,7 +51,9 @@ class Product extends React.Component {
                         <p className="card-text">{jQuery(this.state.product.description).text()}</p>
                     </div>
                 </div>
+                 
             </div>
+            <div className="card-text" className='back-to-list'><Link to='/products'>Return to product list</Link></div>
             </div>
         );
     }
