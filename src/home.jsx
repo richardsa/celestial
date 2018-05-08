@@ -6,12 +6,15 @@ import { Grid, Row, Col } from 'react-bootstrap';
 import LoadingIcon from './loading-icon.gif';
 import Placeholder from './placeholder.jpg';
 
+import AboutHome from './about-home';
+
 class Home extends React.Component {
     
       constructor(props) {
         super(props);
         this.state = {
             page: {}
+            
         }
     }
 
@@ -50,22 +53,9 @@ class Home extends React.Component {
         ) 
           }
         return (
-            <section id="about" data-type="background" data-speed="10"  style={{backgroundImage: "url(" + this.state.page.acf.about_section_background_image.url + ")"}}>
-            <Grid className='about'>
-              <Col md={12}>
-                  <Col md={8}>
-                    <h3 dangerouslySetInnerHTML={{ __html: this.state.page.acf.about_section_title}} />
-                     <p className="card-text" dangerouslySetInnerHTML={{ __html: this.state.page.acf.about_section_body }}  />
-                   </Col>
-                   <Col md={4}>
-                            {
-                                this.state.page.acf.about_section_image ? <img className="center-block img-circle" src={this.state.page.acf.about_section_image.sizes.medium} alt="portrait of richie" /> : null
-                            }
-                    </Col>
-            </Col>
-          
-            </Grid>
-            </section>
+            <div>
+              <AboutHome content={this.state.page} />
+            </div>
         
         )
     }
@@ -87,6 +77,8 @@ class Home extends React.Component {
     render() {
         return (
             <div>
+            
+           
                 { 
                    this.state.page != undefined ?
                    this.renderPage() :
