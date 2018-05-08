@@ -1,13 +1,14 @@
 import React from 'react';
 import { render } from 'react-dom';
 import createBrowserHistory from 'history/createBrowserHistory';
-import { Router, Route, Switch } from 'react-router-dom';
+import { Router, Route, Switch, Redirect } from 'react-router-dom';
 const history = createBrowserHistory();
 
 import Header from './header';
 import Footer from './footer';
 import Home from './home';
 import Posts from './posts';
+import Page from './page';
 import Post from './post';
 import Products from './products';
 import Product from './product';
@@ -21,11 +22,13 @@ import Placeholder from './placeholder.jpg';
 require('./style.scss');
 
 const App = () => (
+    
     <div id="page-inner">
         <Header />
         <div id="content">
             <Switch>
                 <Route exact path={CelestialSettings.path} component={Home} />
+                <Redirect from="/home" to="/"/>
                 <Route exact path={CelestialSettings.path + 'posts'} component={Posts} />
                 <Route exact path={CelestialSettings.path + 'posts/:slug'} component={Post} />
                 <Route exact path={CelestialSettings.path + 'products'} component={Products} />
@@ -33,6 +36,7 @@ const App = () => (
                 <Route exact path={CelestialSettings.path + 'category/:slug'} component={Archive} />
                 <Route exact path={CelestialSettings.path + 'post_tag/:slug'} component={Archive} />
                 <Route exact path={CelestialSettings.path + 'testing'} component={Testing} />
+                <Route path={CelestialSettings.path + ':slug'} component={Page} />
                 <Route component={ NotFound } />
                
             </Switch>

@@ -1,10 +1,15 @@
 import React from 'react';
+import Navigation from './navigation';
 
 const Footer = () => (
-    <footer id="colophon" className="container">
-        <div className="card-footer bg-transparent border-primary">
-            Celestial Theme 2017
-            </div>
+    <footer id="colophon" className="footer">
+        <div className="container">
+            <Navigation />
+        </div>
+        <div className="container">
+            <p>Celestial Theme 2017</p>
+        </div>
+        
     </footer>
 );
 

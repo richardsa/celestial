@@ -4,7 +4,10 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import NotFound from './not-found';
 import LoadingIcon from './loading-icon.gif';
-
+import { Navbar, Nav, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
+// LinkContainer needed to connect react router and react-bootstrap
+// https://stackoverflow.com/a/36933127
+import { LinkContainer } from 'react-router-bootstrap';
 
 class Primary extends React.Component {
 
@@ -17,6 +20,7 @@ class Primary extends React.Component {
 
     componentDidMount() {
         var that = this;
+        console.log(CelestialSettings.URL.menus + "/primary");
         fetch(CelestialSettings.URL.menus + "/primary")
             .then(function (response) {
                 if (!response.ok) {
@@ -28,7 +32,7 @@ class Primary extends React.Component {
               that.setState({ menuItems: res })
             });
     }
-
+    
     // parseTo() and isInternal() functions are meant to check if menu item is external or
     // if external create usual href Link
     // if internal use Link from 'react-router-dom'
@@ -36,7 +40,7 @@ class Primary extends React.Component {
     // without using functions links would return something similar to:
     // https://appurl.com/https://gmail.com
     
-     parseTo(to) {
+    parseTo(to) {
         let parser = document.createElement('a');
         parser.href = to;
         return parser;
@@ -46,40 +50,81 @@ class Primary extends React.Component {
         return window.location.host === toLocation.host;
     }
 
-    renderMenuItem(url, title){
-        const toLocation = this.parseTo(url);
-        const isInternal = this.isInternal(toLocation);
-        if (isInternal) {
-          return (<Link to={url}>{title}</Link>);
-        } else {
-          return (<a href={url}>{title}</a>);
-        }
-    }
-
-    renderParentMenuItem(menuItem){
-        return (
-          <div className='navToggle'>
-           <a href='#' data-toggle="dropdown" className="dropdown-toggle" >{menuItem.title}</a>
-           <ul role="menu" className=" dropdown-menu">{this.renderMenuItems(menuItem.children)}</ul>
-          </div>
-        )
-        
-    }
-
     renderMenuItems(menuItemList) {
       return menuItemList.map((menuItem, i) => {
         if (_.isEmpty(menuItem.children)){
           return (
-              <li className="nav-item nav-link" key={i}>{this.renderMenuItem(menuItem.url,menuItem.title)}</li>
+              this.renderMenuItem(menuItem.url, menuItem.title, i)
           )
         } else {
           return (
-                <li className="nav-item nav-link" key={i}>{this.renderParentMenuItem(menuItem)}</li>                
+              this.renderParentMenuItem(menuItem)
+                              
           )
         }
      });
     }
 
+    renderMenuItem(url, title, i){
+          const toLocation = this.parseTo(url);
+          const isInternal = this.isInternal(toLocation);
+          if (isInternal) {
+              url = url.split('/').slice(3).join('/');
+              url = '/' + url;
+            return (
+              <LinkContainer  key={i} to={url}>
+                <NavItem  href={url} >
+                  {title}
+                </NavItem>
+              </LinkContainer>
+            )
+          } else {
+             return (
+               <NavItem href={url} key={i} eventKey={i}>
+                {title}
+               </NavItem>
+             );
+          }
+      }
+
+      renderChildMenuItem(url, title, i){
+        const toLocation = this.parseTo(url);
+        const isInternal = this.isInternal(toLocation);
+        if (isInternal) {
+            url = url.split('/').slice(3).join('/');
+            url = '/' + url;
+          return (
+            <LinkContainer  key={i} to={url}>
+                <MenuItem href={url}
+                 eventKey={i}>{title}
+                </MenuItem>
+            </LinkContainer>
+          )
+        } else {
+           return (
+             <MenuItem href={url} key={i} eventKey={i}>
+              {title}
+             </MenuItem>
+           );
+        }
+    }
+
+    renderParentMenuItem(menuItem){
+        return (
+          <NavDropdown key={menuItem.title} eventKey={3} title={menuItem.title} id="basic-nav-dropdown">
+            {this.renderChildItems(menuItem.children)}
+          </NavDropdown>
+        )
+        
+    }
+    renderChildItems(childItems){
+      return childItems.map((childItem, i) => {
+        return (
+          this.renderChildMenuItem(childItem.url, childItem.title, i)
+        )
+      });
+    }
+		
     renderEmpty() {
         return (
             <NotFound />
@@ -96,15 +141,23 @@ class Primary extends React.Component {
 
     render() {
         return (
-            <div className="navbar-collapse collapse" id="navbarNavAltMarkup">
-               <ul id="menu-primary" className="nav navbar-nav navbar-right">
+            <Navbar inverse fixedTop collapseOnSelect fluid>
+            <Navbar.Header>
+              <Navbar.Brand>
+                <Link className="navbar-brand" to={CelestialSettings.path} >Celestial</Link>
+              </Navbar.Brand>
+              <Navbar.Toggle />
+            </Navbar.Header>
+            <Navbar.Collapse>
+               <Nav pullRight>
                 { 
                    this.state.menuItems != undefined ?
                    this.renderMenuItems(this.state.menuItems) :
                    this.renderLoading()
                 }
-             </ul>
-           </div>
+             </Nav>
+             </Navbar.Collapse>
+           </Navbar>
         );
     }
 }

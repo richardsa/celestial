@@ -114,7 +114,7 @@ class Posts extends React.Component {
             )
         }
         return (
-            <div>
+            <div id="post-list">
                 <div className="container">
                     <h1 className="posts-title">Posts</h1>
                     <PostList posts={this.state.posts} />

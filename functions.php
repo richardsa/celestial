@@ -33,6 +33,7 @@ function celestial_scripts() {
 		'URL' => array(
 			'api' => esc_url_raw( get_rest_url( null, '/wp/v2' ) ),
 			'acf' => esc_url_raw( get_rest_url( null, '/acf/v3/' ) ),
+			'form' => esc_url_raw( get_rest_url( null, '/contact-form-7/v1/contact-forms/' ) ),
 			'root' => esc_url_raw( $url ),
 			'menus' => esc_url_raw( get_rest_url( null, 'wp-api-menus/v2/menu-locations' ) ),
 		),

@@ -16,7 +16,16 @@ class Post extends React.Component {
     }
 
     componentDidMount() {
-        // above scroll to not working
+      this.getContent();
+    }
+    
+    componentWillReceiveProps(){
+      this.getContent();
+  
+    }
+    
+    getContent(){
+       // above scroll to not working
         // using below for now
         // https://stackoverflow.com/questions/1174863/javascript-scrollto-method-does-nothing/18573599#18573599
         setTimeout(function () {
@@ -25,7 +34,6 @@ class Post extends React.Component {
 
         var that = this;
         var url = window.location.href.split('/');
-        console.log(url);
         var slug = url.pop() || url.pop();
         console.log('post ' + CelestialSettings.URL.api + "/posts?slug=" + slug );
         fetch(CelestialSettings.URL.api + "/posts?slug=" + slug)
@@ -37,12 +45,11 @@ class Post extends React.Component {
             })
             .then(function (res) {
                 that.setState({ post: res[0] })
-            });
+            }); 
     }
     
     renderCategories(categoryList){
         return categoryList.map((category, i) => {
-             console.log(category.name);
              return(
                // <Link to={'/wp-json/wp/v2/categories/' + category.term_id} key={i}>{category.name}</Link>  
                 <Link to={'/category/' + category.slug } key={i}>{category.name} </Link>   
@@ -52,7 +59,6 @@ class Post extends React.Component {
     
     renderTags(tagList){
         return tagList.map((tag, i) => {
-             console.log(tag.name);
              return(
                // <Link to={'/wp-json/wp/v2/categories/' + category.term_id} key={i}>{category.name}</Link>  
                 <Link to={'/post_tag/' + tag.slug } key={i}>{tag.name} </Link>   
@@ -61,7 +67,7 @@ class Post extends React.Component {
     }
     
     renderPosts() {
-          if (_.isEmpty(this.state.post)) {
+        if (_.isEmpty(this.state.post)) {
         return (
             <div>
             {

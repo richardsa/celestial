@@ -1,3 +1,4 @@
+/* variables */
 @media (min-width: 1200px) {
   .container {
     max-width: 1200px; } }
@@ -6,7 +7,7 @@ body, div#page-inner {
   /* Will not work on IE if body is ommitted */
   display: flex;
   flex-direction: column;
-  min-height: 100vh; }
+  /*min-height: 100vh;*/ }
 
 div#content {
   flex-grow: 1; }
@@ -30,9 +31,9 @@ div#content {
   .site-content {
     padding: 2.5em 0 0; } }
 
-footer#colophon {
-  background-color: #fff; }
-
+/*footer#colophon {
+    background-color: #fff;
+}*/
 .aseel-front-page.has-header-image .custom-header-media,
 .aseel-front-page.has-header-video .custom-header-media,
 .home.blog.has-header-image .custom-header-media,
@@ -107,8 +108,8 @@ img.product-image, img.featured-image {
   top: 32px; }
 
 body {
-  margin-top: 100px;
-  font-family: 'proxima-nova', 'Raleway', Helvetica, sans-serif;
+  margin-top: 50px;
+  font-family: 'proxima-nova', 'Raleway', 'Helvetica', 'sans-serif';
   font-size: 16px;
   background: url(/wp-content/themes/celestial/dist/images/tile.jpg) top left repeat; }
 
@@ -124,7 +125,10 @@ body {
   width: 100%;
   max-height: 340px; }
 
-.card {
+.post-entry {
+  margin-bottom: 25px; }
+
+.card, #primary {
   padding: 25px;
   border-radius: 25px;
   box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.2);
@@ -179,13 +183,79 @@ ul.dropdown-menu {
   color: white;
   background: #FB2d37; }
 
+/* home page */
+section#about {
+  padding: 100px 50px;
+  color: #ffffff;
+  min-height: 300px;
+  background-size: cover;
+  background: no-repeat top left fixed; }
+
+/* posts */
+#post-list, .post-entry {
+  padding: 100px 50px; }
+
+/* footer */
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  min-height: 150px;
+  background-image: none;
+  background-color: #000000;
+  padding-top: 50px;
+  padding-bottom: 50px; }
+
+.footer, .footer a {
+  color: #ffffff; }
+
+/* sticky footer stuff */
+html {
+  position: relative;
+  min-height: 100%; }
+
+body {
+  /* Margin bottom by footer height */
+  /*padding-bottom: 25px;*/
+  margin-bottom: 150px; }
+
+body.page-template-page-frontend, body.page-template-page-react {
+  padding-bottom: 50px; }
+
+ul#menu-footer li {
+  padding-right: 25px;
+  float: left; }
+
+ul#menu-footer li a:hover {
+  text-decoration: underline;
+  background-color: #000000 !important; }
+
+/* form styling */
+div.wpcf7 {
+  padding-bottom: 25px; }
+
 /* custom media queries */
 /* target medium and larger screens */
 @media screen and (min-width: 991px) {
   .col-md-4.card-outer .card, .col-md-12.card-outer .card {
     height: 475px; } }
 
+/* target medium and larger screens */
+@media screen and (max-width: 990px) {
+  .col-md-4.card-outer .card, .col-md-12.card-outer .card {
+    height: auto;
+    overflow: auto; } }
+
 @media screen and (min-width: 768px) {
   .navToggle a {
     padding-top: 15px;
     padding-bottom: 15px; } }
+
+@media screen and (max-width: 600px) {
+  body {
+    margin-bottom: 250px; }
+  .footer {
+    text-align: center; }
+  ul#menu-footer li {
+    padding-right: 25px;
+    float: none; } }

@@ -50,8 +50,8 @@ class Home extends React.Component {
         ) 
           }
         return (
-          
-            <Row>
+            <section id="about" data-type="background" data-speed="10"  style={{backgroundImage: "url(" + this.state.page.acf.about_section_background_image.url + ")"}}>
+            <Grid className='about'>
               <Col md={12}>
                   <Col md={8}>
                     <h3 dangerouslySetInnerHTML={{ __html: this.state.page.acf.about_section_title}} />
@@ -64,7 +64,8 @@ class Home extends React.Component {
                     </Col>
             </Col>
           
-            </Row>
+            </Grid>
+            </section>
         
         )
     }
@@ -86,14 +87,12 @@ class Home extends React.Component {
     render() {
         return (
             <div>
-                <div className="container">
-                
                 { 
                    this.state.page != undefined ?
                    this.renderPage() :
                    this.renderEmpty()
                 }
-                </div>
+               
             </div>
         );
     }
